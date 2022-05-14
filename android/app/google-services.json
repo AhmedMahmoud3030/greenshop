@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "709869430896",
+    "project_id": "greenshop-50337",
+    "storage_bucket": "greenshop-50337.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709869430896:android:f73fd5d22e5140d5edecb5",
+        "android_client_info": {
+          "package_name": "com.example.greenshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709869430896-nea97hthpcpc7db3u8in3jmrnnp2irvo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greenshop",
+            "certificate_hash": "b8ce183e44204824961d5b922f3e45e365004d01"
+          }
+        },
+        {
+          "client_id": "709869430896-i0tisd4r088g6jq904eltqq18c8vh3ft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDx4ZRNy-jFDk-p0fIqMqmRAPlG1zdln8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709869430896-i0tisd4r088g6jq904eltqq18c8vh3ft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
