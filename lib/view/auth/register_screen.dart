@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:greenshop/view/auth/register_screen.dart';
+import 'package:greenshop/core/view_model/auth_view_model.dart';
+import 'package:greenshop/view/auth/login_screen.dart';
 
 import '../../constants.dart';
-import '../../core/view_model/auth_view_model.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textformfeild.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginScreen extends GetWidget<AuthViewModel> {
+class RegisterView extends GetWidget<AuthViewModel> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+              Get.off(LoginScreen());
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
@@ -34,33 +47,14 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text: 'Welcome,',
+                      text: 'Sign Up,',
                       color: Colors.black,
                       fontSize: 50,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        FocusScopeNode currentFocus = FocusScope.of(context);
-                        if (!currentFocus.hasPrimaryFocus) {
-                          currentFocus.unfocus();
-                        }
-                        Get.to(RegisterView());
-                      },
-                      child: CustomText(
-                        text: 'Sign Up',
-                        color: primaryColor,
-                        fontSize: 20,
-                      ),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 10,
-                ),
-                CustomText(
-                  text: 'Sign in to Continue',
-                  fontSize: 18,
-                  color: Colors.grey,
+                  height: 30,
                 ),
                 SizedBox(
                   height: 30,
@@ -83,6 +77,21 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 CustomTextFormField(
                   color: primaryColor,
                   fontsize: 16,
+                  header: 'Username',
+                  headerColor: Colors.black,
+                  hintText: 'Green',
+                  onsave: (val) {
+                    controller.username = val;
+                  },
+                  validator: (val) {
+                    if (val.toString().length < 6) {
+                      print('Shloud be more than 6 char username');
+                    }
+                  },
+                ),
+                CustomTextFormField(
+                  color: primaryColor,
+                  fontsize: 16,
                   header: 'Password',
                   headerColor: Colors.black,
                   hintText: '*********',
@@ -95,61 +104,25 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                     }
                   },
                 ),
-                CustomText(
-                  text: 'Forgot Password?',
-                  alignment: Alignment.topRight,
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomButton(
                   onpressed: () {
                     _formKey.currentState.save();
-                    controller.emailSignInMethod();
+                    controller.emailSignUpMethod();
                   },
                   color: primaryColor,
                   child: CustomText(
                     alignment: Alignment.center,
                     color: Colors.white,
                     fontSize: 16,
-                    text: 'SIGN IN',
+                    text: 'SIGN UP',
                   ),
                 ),
                 SizedBox(
                   height: 15,
                 ),
-                CustomText(
-                  text: '-OR-',
-                  color: Colors.grey,
-                  alignment: Alignment.center,
-                  fontSize: 20,
-                ),
-                FlatButton.icon(
-                  onPressed: () {
-                    controller.facebookSignInMethod();
-                  },
-                  icon: FaIcon(
-                    FontAwesomeIcons.facebook,
-                    color: Colors.blue,
-                  ),
-                  label: Text(
-                    'Sign In with Facebook',
-                  ),
-                ),
-                FlatButton.icon(
-                  onPressed: () {
-                    controller.googleSignInMethod();
-                  },
-                  icon: FaIcon(
-                    FontAwesomeIcons.google,
-                    color: Colors.red,
-                  ),
-                  label: Text(
-                    'Sign In with Google    ',
-                  ),
-                )
               ],
             ),
           ),

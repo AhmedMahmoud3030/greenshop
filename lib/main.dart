@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:greenshop/view/control_view.dart';
 
 import 'helper/binding.dart';
-import 'view/auth/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
