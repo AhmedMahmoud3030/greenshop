@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenshop/constants.dart';
+import 'package:greenshop/core/view_model/control_view_model.dart';
 import 'package:greenshop/core/view_model/home_view_model.dart';
 import 'package:greenshop/view/widgets/custom_text.dart';
 
@@ -28,40 +29,42 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(top: 45, left: 20, right: 20),
-            child: Column(
-              children: [
-                _searchTextFormField(),
-                SizedBox(
-                  height: 50,
-                ),
-                CustomText(
-                  text: 'Categories',
-                  fontSize: 30,
-                ),
-                _listViewCategory(),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(text: 'Best Selling', fontSize: 20),
-                      CustomText(
-                        text: 'See all',
-                      ),
-                    ],
+    return  GetBuilder<HomeViewModel>(
+      builder:(controller)=> SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(top: 45, left: 20, right: 20),
+              child: Column(
+                children: [
+                  _searchTextFormField(),
+                  SizedBox(
+                    height: 50,
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                _listViewProduct(context),
-              ],
+                  CustomText(
+                    text: 'Categories',
+                    fontSize: 30,
+                  ),
+                  _listViewCategory(),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Best Selling', fontSize: 20),
+                        CustomText(
+                          text: 'See all',
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  _listViewProduct(context),
+                ],
+              ),
             ),
           ),
-        );
+    );
   }
 
   Widget _searchTextFormField() {

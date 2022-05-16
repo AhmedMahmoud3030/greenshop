@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenshop/core/view_model/auth_view_model.dart';
 import 'package:greenshop/view/auth/login_screen.dart';
-import 'package:greenshop/view/cart_view.dart';
-import 'package:greenshop/view/home_view.dart';
-import 'package:greenshop/view/profile_view.dart';
 
-import '../core/view_model/home_view_model.dart';
+import '../core/view_model/control_view_model.dart';
 
 class ControlView extends GetWidget<AuthViewModel> {
   @override
@@ -15,15 +12,18 @@ class ControlView extends GetWidget<AuthViewModel> {
       () {
         return Get.find<AuthViewModel>().user == null
             ? LoginScreen()
-            : Scaffold(
-                bottomNavigationBar: bottomAppBar(), body: Get.find());
+            : GetBuilder<ControlViewModel>(
+              builder: ( controller)=>
+              Scaffold(
+                  bottomNavigationBar: bottomAppBar(), body:controller.currentScreen ),
+            );
       },
     );
   }
 
   Widget bottomAppBar() {
-    return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
+    return GetBuilder<ControlViewModel>(
+      init: ControlViewModel (),
       builder: (controller) => BottomNavigationBar(
           elevation: 0,
           selectedItemColor: Colors.black,

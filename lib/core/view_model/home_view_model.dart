@@ -1,39 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../../view/cart_view.dart';
-import '../../view/home_view.dart';
-import '../../view/profile_view.dart';
+import '../../model/category_model.dart';
+import '../../model/category_model.dart';
+import '../../model/category_model.dart';
+import '../../model/category_model.dart';
 
 class HomeViewModel extends GetxController {
-  int _navigationValue = 0;
-  Widget _currentScreen = HomeView();
-
-  get navigationValue => _navigationValue;
-  get currentScreen => _currentScreen;
-  void changeSelectedValue(int selectedValue) {
-    _navigationValue = selectedValue;
-
-    switch (selectedValue) {
-      case 0:
-        {
-          _currentScreen = HomeView();
-        }
-        break;
-      case 1:
-        {
-          _currentScreen = CartView();
-        }
-        break;
-      case 2:
-        {
-          _currentScreen = ProfileView();
-        }
-
-        break;
-      default:
-    }
-
-    update();
+  
+  List<CategoryModel> _categoryModel = [];
+  final CollectionReference _categoryCollectionRef =
+      FirebaseFirestore.instance.collection('categories');
+  HomeViewModel() {
+    getCategory();
+  }
+  getCategory() async {
+    _categoryCollectionRef.get().then((value) => print(value.docs[0].data()));
   }
 }
